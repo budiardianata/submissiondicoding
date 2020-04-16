@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="data"
+            type="com.budi.submission.receipe.model.Receipe" />
+    </data>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".DetailActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_bar_height"
+            android:fitsSystemWindows="true"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                bind:contentScrim="?attr/colorPrimary"
+                bind:expandedTitleGravity="bottom"
+                bind:expandedTitleTextAppearance="@style/TextAppearance.Design.CollapsingToolbar.Expanded"
+                bind:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                bind:statusBarScrim="@color/colorPrimary">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/app_name"
+                    android:fitsSystemWindows="true"
+                    android:scaleType="centerCrop"
+                    bind:gambar="@{data.image}"
+                    android:transitionName="gambar"
+                    bind:layout_collapseMode="parallax"
+                    bind:layout_collapseParallaxMultiplier="0.5"
+                    tools:src="@tools:sample/backgrounds/scenic" />
+
+                <androidx.appcompat.widget.Toolbar
+                    bind:title="@{data.judul}"
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    bind:layout_collapseMode="pin"
+                    bind:popupTheme="@style/AppTheme.PopupOverlay" />
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            bind:layout_anchor="@id/appbar"
+            bind:layout_anchorGravity="bottom|end"
+            android:contentDescription="@string/about"
+            bind:fabSize="mini"
+            android:src="@drawable/ic_link" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            bind:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:padding="@dimen/spacing_middle"
+                android:layout_width="match_parent"
+                android:nestedScrollingEnabled="true"
+                android:layout_height="match_parent"
+                bind:layout_behavior="@string/appbar_scrolling_view_behavior">
+                <TextView
+                    android:id="@+id/deskripsi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{data.deskripsi}"
+                    tools:text="@tools:sample/lorem"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                    bind:layout_constraintEnd_toEndOf="parent"
+                    android:textSize="16sp"
+                    bind:layout_constraintStart_toStartOf="parent"
+                    bind:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:textSize="18sp"
+                    android:id="@+id/bahan"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bahan Yang Dibutuhkan"
+                    bind:layout_constraintTop_toBottomOf="@+id/deskripsi"/>
+                <LinearLayout
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="10dp"
+                    bind:layout_constraintTop_toBottomOf="@+id/bahan"
+                    android:orientation="vertical"
+                    android:id="@+id/ll_bahan">
+                </LinearLayout>
+
+                <TextView
+                    android:textSize="18sp"
+                    android:id="@+id/cara_buat"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Langkah Pembuatan"
+                    bind:layout_constraintTop_toBottomOf="@+id/ll_bahan"/>
+
+                <LinearLayout
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="10dp"
+                    bind:layout_constraintTop_toBottomOf="@+id/cara_buat"
+                    android:orientation="vertical"
+                    android:id="@+id/ll_cara_buat">
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
